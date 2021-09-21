@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Driver for Markov Model classes
  * @author ola
- * Modified for Fall 2020
+ * Modified for Fall 2021
  */
 
 public class MarkovDriver {
@@ -27,10 +27,8 @@ public class MarkovDriver {
 	}
 	
 	public static void main(String[] args) {
-			
-		//String filename = "data/trump-sou17.txt";
-		//String filename = "data/bush-sou07.txt";
-		String filename = "data/trumptweets2020.txt";
+
+		String filename = "data/biden-2021.txt";
 
 		if (args.length > 0) {
 			filename = args[1];
@@ -43,10 +41,10 @@ public class MarkovDriver {
 		MarkovInterface<String> standard = new BaseMarkov();
 		//MarkovInterface<String> efficient = new EfficientMarkov();
 		//MarkovInterface<WordGram> wmm = new BaseWordMarkov();
-		MarkovInterface<WordGram> ewm = new EfficientWordMarkov();
+		//MarkovInterface<WordGram> ewm = new EfficientWordMarkov();
 
 		// first parameter is one of the MarkovInterface variables
-		markovGenerate(ewm,text);
+		markovGenerate(standard,text);
 	}
 
 	private static void printNicely(String random, int screenWidth) {
