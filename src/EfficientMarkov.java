@@ -26,7 +26,7 @@ public class EfficientMarkov extends BaseMarkov {
 			//	String value = PSEUDO_EOS;
 			//} else {
 			if(i+myOrder+1 < myText.length()){
-				value = myText.substring(i + myOrder + 1, i + myOrder + 2); // get the letter that occurs next
+				value = myText.substring(i + myOrder /*+ 1*/, i + myOrder + 1/*2*/); // get the letter that occurs next
 			}
 			myMap.putIfAbsent(key, new ArrayList<String>());
 			ArrayList<String> current_value = myMap.get(key);
