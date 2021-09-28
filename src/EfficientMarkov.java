@@ -28,11 +28,19 @@ public class EfficientMarkov extends BaseMarkov {
 			if(i+myOrder+1 < myText.length()){
 				value = myText.substring(i + myOrder /*+ 1*/, i + myOrder + 1/*2*/); // get the letter that occurs next
 			}
-			myMap.putIfAbsent(key, new ArrayList<String>());
-			ArrayList<String> current_value = myMap.get(key);
-			current_value.add(value);
+
+			if(myMap.containsKey(key)){
+				ArrayList<String> current_value = myMap.get(key);
+				current_value.add(value);
+				myMap.put(key, current_value);
+			} else {
+				myMap.put(key, new ArrayList<String>());
+			}
+			//myMap.putIfAbsent(key, new ArrayList<String>());
+			//ArrayList<String> current_value = myMap.get(key);
+			//current_value.add(value);
 			//myMap.put(key, myMap.get(key).add(value));
-			myMap.put(key, current_value);
+			//myMap.put(key, current_value);
 		}
 	}
 	@Override

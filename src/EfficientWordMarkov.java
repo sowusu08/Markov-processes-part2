@@ -36,10 +36,14 @@ public class EfficientWordMarkov extends BaseWordMarkov {
             } else {
                 value = myWords[i + myOrder]; // get the word that occurs next
             }
-            myMap.putIfAbsent(key, new ArrayList<String>());
-            ArrayList<String> current_value = myMap.get(key);
-            current_value.add(value);
-            myMap.put(key, current_value);
+
+            if(myMap.containsKey(key)){
+                ArrayList<String> current_value = myMap.get(key);
+                current_value.add(value);
+                myMap.put(key, current_value);
+            } else {
+                myMap.put(key, new ArrayList<String>());
+            }
         }
     }
 
