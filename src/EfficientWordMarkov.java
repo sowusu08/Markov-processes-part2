@@ -29,21 +29,19 @@ public class EfficientWordMarkov extends BaseWordMarkov {
             // make each word a wordgram object with myOrder number of words and set it as the key
             WordGram key = new WordGram(myWords,i,myOrder);
 
+            //String value = PSEUDO_EOS;
             String value = "";
             // get the next word following word gram and set to value
-            if(i+myOrder == myWords.length){
-                value = PSEUDO_EOS;
-            } else {
+            if(i+myOrder < myWords.length){
                 value = myWords[i + myOrder]; // get the word that occurs next
+            } else {
+                value = PSEUDO_EOS;
             }
 
-            if(myMap.containsKey(key)){
-                ArrayList<String> current_value = myMap.get(key);
-                current_value.add(value);
-                myMap.put(key, current_value);
-            } else {
-                myMap.put(key, new ArrayList<String>());
-            }
+            myMap.putIfAbsent(key, new ArrayList<String>());
+            ArrayList<String> current_value = myMap.get(key);
+            current_value.add(value);
+            myMap.put(key, current_value);
         }
     }
 
