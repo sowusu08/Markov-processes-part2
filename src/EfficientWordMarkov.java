@@ -27,21 +27,28 @@ public class EfficientWordMarkov extends BaseWordMarkov {
         for(int i=0; i < myWords.length - myOrder + 1; i++){
             // loop through my words array
             // make each word a wordgram object with myOrder number of words and set it as the key
-            WordGram key = new WordGram(myWords,i,myOrder);
+            WordGram key_ = new WordGram(myWords,i,myOrder);
 
             //String value = PSEUDO_EOS;
-            String value = "";
+            //String value = "";
             // get the next word following word gram and set to value
-            if(i+myOrder < myWords.length){
-                value = myWords[i + myOrder]; // get the word that occurs next
+            //if(i+myOrder < myWords.length){
+            //    value = myWords[i + myOrder]; // get the word that occurs next
+            //} else {
+            //    value = PSEUDO_EOS;
+            //}
+
+            if(i+myOrder == myWords.length){
+                myMap.get(key_).add(PSEUDO_EOS);
             } else {
-                value = PSEUDO_EOS;
+                String value = myWords[i + myOrder]; // get the word that occurs next
+                myMap.get(key_).add(value);
             }
 
-            myMap.putIfAbsent(key, new ArrayList<String>());
-            ArrayList<String> current_value = myMap.get(key);
-            current_value.add(value);
-            myMap.put(key, current_value);
+            //myMap.putIfAbsent(key, new ArrayList<String>());
+            //ArrayList<String> current_value = myMap.get(key);
+            //current_value.add(value);
+            //myMap.put(key, current_value);
         }
     }
 
