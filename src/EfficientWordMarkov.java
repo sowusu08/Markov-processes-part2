@@ -29,6 +29,8 @@ public class EfficientWordMarkov extends BaseWordMarkov {
             // make each word a wordgram object with myOrder number of words and set it as the key
             WordGram key_ = new WordGram(myWords,i,myOrder);
 
+            myMap.putIfAbsent(key_, new ArrayList<String>());
+            
             //String value = PSEUDO_EOS;
             //String value = "";
             // get the next word following word gram and set to value
