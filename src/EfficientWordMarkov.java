@@ -29,9 +29,11 @@ public class EfficientWordMarkov extends BaseWordMarkov {
             // make each word a wordgram object with myOrder number of words and set it as the key
             WordGram key = new WordGram(myWords,i,myOrder);
 
-            String value = PSEUDO_EOS;
+            String value = "";
             // get the next word following word gram and set to value
-            if(i+myOrder < myWords.length){
+            if(i+myOrder == myWords.length){
+                value = PSEUDO_EOS;
+            } else {
                 value = myWords[i + myOrder]; // get the word that occurs next
             }
             myMap.putIfAbsent(key, new ArrayList<String>());
@@ -39,5 +41,27 @@ public class EfficientWordMarkov extends BaseWordMarkov {
             current_value.add(value);
             myMap.put(key, current_value);
         }
+    }
+
+    @Override
+    public ArrayList<String> getFollows(WordGram kGram) {
+
+        int pos = 0;
+        ArrayList<String> follows = new ArrayList<String>();
+        while (true) {
+            int index = indexOf(myWords,kGram,pos);
+            if (index == -1) {
+                break;
+            }
+            int start = index + kGram.length();
+            if (start >= myWords.length) {
+                follows.add(PSEUDO_EOS);
+                break;
+            }
+
+            follows.add(myWords[start]);
+            pos = index+1;
+        }
+        return follows;
     }
 }
